@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Macon Moore | IT & Cybersecurity</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&display=swap');
+
+```
+:root {
+  --black: #060912;
+  --panel: #0c1220;
+  --border: #1a2a45;
+  --green: #00ff88;
+  --blue: #00aaff;
+  --text: #eef4ff;
+  --muted: #8aa8cc;
+  --mono: 'Share Tech Mono', monospace;
+  --sans: 'Syne', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+
+/* Grid bg */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 55px 55px;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(6,9,18,0.9);
+  backdrop-filter: blur(10px);
+}
+
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--green);
+}
+
+.nav-logo span { color: var(--muted); }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--green); }
+
+/* SECTIONS */
+.section {
+  position: relative;
+  z-index: 2;
+  padding: 5rem 2.5rem;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--green);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.4rem;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  margin-bottom: 2.5rem;
+  line-height: 1.1;
+}
+
+.section-title .dim { color: var(--muted); }
+
+hr.divider {
+  position: relative;
+  z-index: 2;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+/* HERO */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 7rem 2.5rem 4rem;
+  z-index: 2;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--green);
+  letter-spacing: 0.18em;
+  margin-bottom: 1.2rem;
+  animation: fadeUp 0.5s 0.1s both;
+}
+
+.hero-name {
+  font-size: clamp(3rem, 9vw, 6rem);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 1rem;
+  animation: fadeUp 0.5s 0.3s both;
+}
+
+.hero-name .accent { color: var(--green); }
+
+.hero-title {
+  font-family: var(--mono);
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  color: var(--blue);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.5s 0.5s both;
+}
+
+.hero-desc {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.85;
+  max-width: 540px;
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.5s 0.7s both;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeUp 0.5s 0.9s both;
+}
+
+.btn {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.8rem;
+  border: 1px solid;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.btn-primary {
+  color: var(--black);
+  background: var(--green);
+  border-color: var(--green);
+  font-weight: 700;
+}
+
+.btn-primary:hover { box-shadow: 0 0 30px #00ff8866; }
+
+.btn-outline {
+  color: var(--blue);
+  border-color: var(--blue);
+  background: transparent;
+}
+
+.btn-outline:hover { box-shadow: 0 0 20px #00aaff44; }
+
+.blink { animation: blink 1s step-end infinite; color: var(--green); }
+
+/* ABOUT */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.about-text p {
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 1.1rem;
+  font-size: 0.97rem;
+}
+
+.about-text p strong { color: var(--text); }
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.stat-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  padding: 1.2rem;
+  transition: border-color 0.2s;
+}
+
+.stat-card:hover { border-color: var(--green); }
+
+.stat-num {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  color: var(--green);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.stat-lbl {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* SKILLS */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+.skill-group {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.skill-group:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+
+.skill-group-title {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--blue);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.65rem;
+  font-size: 0.88rem;
+  color: var(--text);
+  flex-wrap: wrap;
+}
+
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+  box-shadow: 0 0 5px var(--green);
+}
+
+.dot.dim { background: var(--muted); box-shadow: none; }
+
+.skill-item.dim-item { color: var(--muted); }
+
+.badge {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  padding: 0.1rem 0.45rem;
+  border: 1px solid var(--green);
+  color: var(--green);
+  margin-left: auto;
+}
+
+.badge.muted { border-color: var(--muted); color: var(--muted); }
+
+/* PROJECTS */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.project-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 1.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green), var(--blue));
+  transform: scaleX(0);
+  transition: transform 0.3s;
+  transform-origin: left;
+}
+
+.project-card:hover { border-color: var(--green); transform: translateY(-2px); }
+.project-card:hover::after { transform: scaleX(1); }
+
+.project-card.wide {
+  grid-column: span 2;
+}
+
+.project-num {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 0.18em;
+  margin-bottom: 0.8rem;
+}
+
+.project-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--text);
+}
+
+.project-desc {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 1.2rem;
+}
+
+.project-bullets {
+  list-style: none;
+  margin-bottom: 1.2rem;
+}
+
+.project-bullets li {
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 0.35rem 0 0.35rem 1rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.project-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-family: var(--mono);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  padding: 0.18rem 0.55rem;
+  background: #00ff8812;
+  border: 1px solid #00ff8840;
+  color: var(--green);
+}
+
+.tag.blue {
+  background: #00aaff10;
+  border-color: #00aaff40;
+  color: var(--blue);
+}
+
+.dim-card { opacity: 0.55; }
+
+/* TERMINAL */
+.terminal {
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+
+.terminal-bar {
+  background: #111c30;
+  padding: 0.55rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tdot { width: 10px; height: 10px; border-radius: 50%; }
+.tr { background: #ff5f57; }
+.ty { background: #febc2e; }
+.tg { background: #28c840; }
+
+.t-title {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-left: 0.4rem;
+}
+
+.terminal-body {
+  padding: 1.8rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  line-height: 2.1;
+}
+
+.tp { color: var(--green); }
+.tc { color: var(--text); }
+.to { color: var(--muted); padding-left: 1rem; display: block; }
+.th { color: var(--blue); }
+
+/* GOALS */
+.goals-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.goal-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 1rem 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.goal-item:hover { border-color: var(--green); }
+
+.gcheck {
+  width: 17px; height: 17px;
+  border: 1px solid var(--muted);
+  border-radius: 2px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: bold;
+}
+
+.gcheck.done {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--black);
+}
+
+.goal-text { font-size: 0.88rem; color: var(--text); }
+
+/* CONTACT */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.contact-intro {
+  font-size: 0.97rem;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 1.8rem;
+}
+
+.contact-links { display: flex; flex-direction: column; gap: 0.8rem; }
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1.2rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.contact-link:hover { border-color: var(--green); color: var(--green); }
+.cl-icon { color: var(--green); width: 18px; text-align: center; }
+
+.form { display: flex; flex-direction: column; gap: 0.9rem; }
+
+.form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.form-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.form-input, .form-textarea {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus, .form-textarea:focus { border-color: var(--green); }
+.form-textarea { height: 110px; resize: vertical; }
+
+/* FOOTER */
+footer {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--border);
+  padding: 1.8rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+footer p {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+footer span { color: var(--green); }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s, transform 0.65s;
+}
+
+.reveal.visible { opacity: 1; transform: none; }
+
+/* MOBILE */
+@media (max-width: 720px) {
+  nav { padding: 0.9rem 1.2rem; }
+  .nav-links { display: none; }
+  #hero { padding: 6rem 1.2rem 3rem; min-height: auto; }
+  .section { padding: 3.5rem 1.2rem; }
+  .about-grid,
+  .skills-grid,
+  .projects-grid,
+  .goals-grid,
+  .contact-grid { grid-template-columns: 1fr; }
+  .project-card.wide { grid-column: span 1; }
+  footer { flex-direction: column; text-align: center; }
+}
+```
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">mm<span>@portfolio</span><span class="blink">_</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#learning">Learning</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+
+  <div id="hero">
+    <div>
+      <div class="hero-tag">&gt; INITIALIZING PROFILE // JACKSONVILLE, FL</div>
+      <h1 class="hero-name">Macon<br><span class="accent" style="color:var(--green)">Moore</span></h1>
+      <div class="hero-title">IT &amp; Cybersecurity &nbsp;//&nbsp; Automation &amp; AI &nbsp;//&nbsp; Real Estate Investor</div>
+      <p class="hero-desc">Pivoting from real estate into tech — building skills in cybersecurity, automation, and AI while managing investment properties. I build things, document them, and ship them.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="https://github.com/MaconMoMoney" target="_blank" class="btn btn-outline">GitHub Profile</a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ABOUT -->
+
+  <div class="section" id="about">
+    <div class="reveal">
+      <div class="section-label">&gt; 01 // ABOUT</div>
+      <h2 class="section-title">Who I <span class="dim">Am</span></h2>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>I'm a licensed <strong>Florida Realtor</strong> actively transitioning into IT and cybersecurity. I've spent years analyzing systems — real estate deals, market trends, investment ROI — and now I'm applying that same analytical mindset to building technical skills that scale.</p>
+        <p>I'm pursuing CompTIA certifications while building real projects: automation pipelines, finance dashboards, and tools that solve actual problems. I don't just study — I <strong>build and document</strong>.</p>
+        <p>Long-term I'm working toward a career in <strong>cybersecurity or IT infrastructure</strong> while growing a portfolio of cash-flowing rental properties.</p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <span class="stat-num">3+</span>
+          <span class="stat-lbl">Projects Built</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">$145K</span>
+          <span class="stat-lbl">Net Worth</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">A+</span>
+          <span class="stat-lbl">CompTIA In Progress</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">JAX</span>
+          <span class="stat-lbl">Jacksonville, FL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- SKILLS -->
+
+  <div class="section" id="skills">
+    <div class="reveal">
+      <div class="section-label">&gt; 02 // SKILLS</div>
+      <h2 class="section-title">Tech <span class="dim">Stack</span></h2>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <div class="skill-group-title">// Certifications</div>
+        <div class="skill-item dim-item"><div class="dot dim"></div> CompTIA A+ <span class="badge muted">IN PROGRESS</span></div>
+        <div class="skill-item dim-item"><div class="dot dim"></div> CompTIA Network+ <span class="badge muted">PLANNED</span></div>
+        <div class="skill-item dim-item"><div class="dot dim"></div> CompTIA Security+ <span class="badge muted">PLANNED</span></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">// Automation & Dev</div>
+        <div class="skill-item"><div class="dot"></div> n8n Workflows <span class="badge">ACTIVE</span></div>
+        <div class="skill-item"><div class="dot"></div> ngrok / Tunneling <span class="badge">ACTIVE</span></div>
+        <div class="skill-item"><div class="dot"></div> Python (Scripting)</div>
+        <div class="skill-item"><div class="dot"></div> JavaScript</div>
+        <div class="skill-item"><div class="dot"></div> HTML / CSS</div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">// Platforms & Tools</div>
+        <div class="skill-item"><div class="dot"></div> Windows / Linux</div>
+        <div class="skill-item"><div class="dot"></div> Git / GitHub</div>
+        <div class="skill-item"><div class="dot"></div> REST APIs</div>
+        <div class="skill-item"><div class="dot"></div> AI / LLM Tooling</div>
+        <div class="skill-item dim-item"><div class="dot dim"></div> pfSense / Home Lab <span class="badge muted">BUILDING</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- PROJECTS -->
+
+  <div class="section" id="projects">
+    <div class="reveal">
+      <div class="section-label">&gt; 03 // PROJECTS</div>
+      <h2 class="section-title">What I've <span class="dim">Built</span></h2>
+    </div>
+    <div class="projects-grid reveal">
+
+```
+  <div class="project-card wide">
+    <div class="project-num">&gt; PROJECT_01 // FEATURED</div>
+    <h3 class="project-name">AI Automation Workflow (n8n + ngrok)</h3>
+    <p class="project-desc">Self-hosted automation pipeline using n8n routed through ngrok for persistent external access. Built to automate repetitive tasks and explore AI-powered workflow orchestration.</p>
+    <ul class="project-bullets">
+      <li>Set up local n8n instance with persistent webhook endpoints via ngrok</li>
+      <li>Designed multi-step automation workflows with conditional logic</li>
+      <li>Integrated REST APIs for cross-platform data flow</li>
+    </ul>
+    <div class="tags">
+      <span class="tag">n8n</span>
+      <span class="tag">ngrok</span>
+      <span class="tag blue">JavaScript</span>
+      <span class="tag blue">REST APIs</span>
+      <span class="tag">Automation</span>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-num">&gt; PROJECT_02</div>
+    <h3 class="project-name">Personal Finance Dashboard</h3>
+    <p class="project-desc">Interactive budget tracker to manage monthly expenses, debt, and net worth across multiple categories.</p>
+    <ul class="project-bullets">
+      <li>Tracks fixed bills, transportation, and subscriptions</li>
+      <li>Visual net worth breakdown across cash, equity, and assets</li>
+    </ul>
+    <div class="tags">
+      <span class="tag blue">HTML</span>
+      <span class="tag blue">CSS</span>
+      <span class="tag blue">JavaScript</span>
+    </div>
+  </div>
+
+  <div class="project-card dim-card">
+    <div class="project-num">&gt; PROJECT_03 // COMING SOON</div>
+    <h3 class="project-name">Real Estate Investment Tracker</h3>
+    <p class="project-desc">Tool to analyze rental property cash flow, DSCR ratios, and renovation ROI for a growing investment portfolio.</p>
+    <ul class="project-bullets">
+      <li>Cash flow and cap rate analysis per property</li>
+      <li>Renovation cost tracking and ARV projections</li>
+    </ul>
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag blue">React</span>
+      <span class="tag">Real Estate</span>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- LEARNING -->
+
+  <div class="section" id="learning">
+    <div class="reveal">
+      <div class="section-label">&gt; 04 // CURRENTLY LEARNING</div>
+      <h2 class="section-title">Active <span class="dim">Training</span></h2>
+    </div>
+    <div class="terminal reveal">
+      <div class="terminal-bar">
+        <div class="tdot tr"></div>
+        <div class="tdot ty"></div>
+        <div class="tdot tg"></div>
+        <span class="t-title">macon@portfolio ~ learning-path.sh</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="tp">$ </span><span class="tc">cat current-focus.txt</span></div>
+        <span class="to">&#9500;&#9472;&#9472; <span class="th">CompTIA A+</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Core 1 &amp; Core 2 (active)</span>
+        <span class="to">&#9500;&#9472;&#9472; <span class="th">Linux Fundamentals</span> &nbsp;&nbsp; File system, permissions, CLI</span>
+        <span class="to">&#9500;&#9472;&#9472; <span class="th">Python Scripting</span> &nbsp;&nbsp;&nbsp;&nbsp; Automation &amp; tooling</span>
+        <span class="to">&#9500;&#9472;&#9472; <span class="th">Networking Basics</span> &nbsp;&nbsp;&nbsp; TCP/IP, DNS, subnetting</span>
+        <span class="to">&#9492;&#9472;&#9472; <span class="th">Cybersecurity</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; CIA triad, threat modeling</span>
+        <br/>
+        <div><span class="tp">$ </span><span class="tc">cat study-schedule.txt</span></div>
+        <span class="to">Daily target: 30&#8211;60 minutes focused study</span>
+        <span class="to">Method: Hands-on projects + cert prep</span>
+        <span class="to">Next milestone: Pass CompTIA A+ exam</span>
+        <br/>
+        <div><span class="tp">$ </span><span class="blink">_</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- GOALS -->
+
+  <div class="section" id="goals">
+    <div class="reveal">
+      <div class="section-label">&gt; 05 // 2026 GOALS</div>
+      <h2 class="section-title">The <span class="dim">Roadmap</span></h2>
+    </div>
+    <div class="goals-grid reveal">
+      <div class="goal-item"><div class="gcheck"></div><span class="goal-text">Pass CompTIA A+ exam</span></div>
+      <div class="goal-item"><div class="gcheck"></div><span class="goal-text">Build functional home lab (VMs, pfSense)</span></div>
+      <div class="goal-item"><div class="gcheck"></div><span class="goal-text">Land first IT / cybersecurity role</span></div>
+      <div class="goal-item"><div class="gcheck"></div><span class="goal-text">Complete CompTIA Network+</span></div>
+      <div class="goal-item"><div class="gcheck done">✓</div><span class="goal-text">Launch GitHub portfolio &amp; profile README</span></div>
+      <div class="goal-item"><div class="gcheck done">✓</div><span class="goal-text">Build and deploy automation pipeline (n8n)</span></div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- CONTACT -->
+
+  <div class="section" id="contact">
+    <div class="reveal">
+      <div class="section-label">&gt; 06 // CONTACT</div>
+      <h2 class="section-title">Get In <span class="dim">Touch</span></h2>
+    </div>
+    <div class="contact-grid reveal">
+      <div>
+        <p class="contact-intro">I'm actively looking for opportunities in IT, cybersecurity, and automation. If you're hiring, collaborating, or just want to connect — reach out.</p>
+        <div class="contact-links">
+          <a href="https://github.com/MaconMoMoney" target="_blank" class="contact-link">
+            <span class="cl-icon">&#9671;</span> github.com/MaconMoMoney
+          </a>
+          <a href="mailto:maconmoore2001@gmail.com" class="contact-link">
+            <span class="cl-icon">@</span> maconmoore2001@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/macon-m-229ba6293" target="_blank" class="contact-link">
+            <span class="cl-icon">in</span> linkedin.com/in/macon-m-229ba6293
+          </a>
+        </div>
+      </div>
+      <div class="form">
+        <div class="form-group">
+          <label class="form-label">// Name</label>
+          <input type="text" class="form-input" placeholder="Your name"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">// Email</label>
+          <input type="email" class="form-input" placeholder="your@email.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">// Message</label>
+          <textarea class="form-textarea" placeholder="What's on your mind?"></textarea>
+        </div>
+        <a href="mailto:maconmoore2001@gmail.com" class="btn btn-primary" style="text-align:center">Send Message</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 <span>Macon Moore</span> // Built with HTML, CSS &amp; ambition</p>
+    <p>Jacksonville, FL // <span>Open to opportunities</span></p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
